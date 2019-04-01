@@ -13,7 +13,8 @@
   <body>
     <div class="container">
         <div class="row">
-            <div class="col-8">
+            <div class="col-4">
+              <h1>{{ page_title }}</h1>
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}
                 <div class="alert alert-warning" role="alert">
@@ -22,25 +23,26 @@
                     {% endfor %}
                 </div>
                 {% endif %}
-                {% endwith %} 
-              <h1>Новостной сайт</h1>
-            {% for news in news_list %}
+                {% endwith %}
+                <form action="{{ url_for('process_login') }}" method="POST">
+                  {{ form.hidden_tag() }}
+
+                <div class="div form-group">
+                    {{ form.username.label }}<br>
+                    {{ form.username() }}
+                </div>
+
+                <div class="div form-group">
+                    {{ form.password.label }}<br>
+                    {{ form.password() }}
+                </div>
+                <p>{{ form.submit }}</p>
+
+              </form>
             
-            <h3><a href="{{ news.url }}">{{ news.title }} </a></h3>
-            <p>{{ news.published.strftime('%d.%m.%Y') }}</p>
-            <hr />
-            
-            {% endfor %}
             
             </div>
-            <div class="col-4">
-                <h2>Прогноз погоды</h2>
-                {% if weather %}
-                    Погода {{ weather.temp_C }}, ощущается как {{ weather.FeelsLikeC }}
-                {% else %}
-                    Прогноз временно не доступен
-                {% endif %}
-            </div>
+            <div class="col-8"></div>
         </div>
     </div>
 
