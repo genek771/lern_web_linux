@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-4">
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="alert alert-warning" role="alert">
+            {% for message in messages %}
+                {{ message }}<br>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+        <form action="{{ url_for('user.process_register') }}" method="POST">
+          {{ form.hidden_tag() }}
+
+        <div class="div form-group">
+            {{ form.username.label }}<br>
+            {{ form.username() }}
+        </div>
+        <div class="div form-group">
+          {{ form.email.label }}<br>
+          {{ form.email() }}
+      </div>
+      <div class="div form-group">
+          {{ form.password.label }}<br>
+          {{ form.password() }}
+      </div>
+      <div class="div form-group">
+        {{ form.password2.label }}<br>
+        {{ form.password2() }}
+      </div>
+        <p>{{ form.submit }}</p>
+
+      </form>
+    
+    
+    </div>
+    <div class="col-8"></div>
+</div>
+{% endblock %}
