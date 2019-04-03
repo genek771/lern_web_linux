@@ -2,17 +2,19 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-4">
-
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
         <div class="alert alert-warning" role="alert">
-            {% for message in messages %}
-                {{ message }}<br>
-            {% endfor %}
+          {{ message }}<br>
         </div>
+        {% endfor %}
         {% endif %}
-        {% endwith %}
+    {% endwith %}
+    </div>
+    
+    
+    <div class="col-4">
         <form action="{{ url_for('user.process_register') }}" method="POST">
           {{ form.hidden_tag() }}
 
